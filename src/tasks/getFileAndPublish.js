@@ -1,5 +1,5 @@
 /**
- * Send client specification to LDMP when connected.
+ * Get data from HOBOlink webservice and publish to NATS.
  */
 
 module.exports = {

@@ -1,5 +1,5 @@
 /**
- * Trigger NATS (and LDMP) reconnect if we're supposed to be connected and we're not.
+ * Trigger NATS reconnect if we're supposed to be connected and we're not.
  */
 
 module.exports = {
