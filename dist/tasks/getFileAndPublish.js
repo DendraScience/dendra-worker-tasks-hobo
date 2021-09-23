@@ -3,9 +3,6 @@
 /**
  * Send client specification to LDMP when connected.
  */
-// TODOs:
-// - Update comments
-// - Health check
 module.exports = {
   clear(m) {
     delete m.responseDate;
