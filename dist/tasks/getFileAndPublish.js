@@ -83,7 +83,7 @@ module.exports = {
       }
     }
 
-    if (response && response.data && response.data.observation_list && response.data.observation_list.length) {
+    if (response && response.data && response.data.observation_list) {
       const list = response.data.observation_list;
       let observations = [];
       observationCount = list.length;
