@@ -1,17 +1,17 @@
 /**
- * Tests for importData tasks
+ * Tests for importManaged tasks
  */
 
 const moment = require('moment')
 
-describe('importData tasks', function () {
+describe('importManaged tasks', function () {
   this.timeout(180000)
 
   const now = new Date()
   const model = {
     props: {},
     state: {
-      _id: 'taskMachine-importData-current',
+      _id: 'taskMachine-importManaged-current',
       health_check_threshold: 1200,
       source_defaults: {
         endpoint: '/data/file/json/user/4475',
@@ -28,7 +28,7 @@ describe('importData tasks', function () {
           },
           description: 'Test Back Bay Science Center - (S4)',
           logger: '10990817',
-          pub_to_subject: 'hobo.importData.out.' + main.ts
+          pub_to_subject: 'hobo.importManaged.out.' + main.ts
         },
         {
           backfill: {
@@ -40,7 +40,7 @@ describe('importData tasks', function () {
           },
           description: 'Test Burton Mesa ER - (S5)',
           logger: '10990818',
-          pub_to_subject: 'hobo.importData.out.' + main.ts
+          pub_to_subject: 'hobo.importManaged.out.' + main.ts
         }
       ],
       created_at: now,
@@ -58,7 +58,7 @@ describe('importData tasks', function () {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: 'importData'
+    value: 'importManaged'
   })
   Object.defineProperty(model, 'private', {
     enumerable: false,
@@ -85,7 +85,7 @@ describe('importData tasks', function () {
   })
 
   it('should import', function () {
-    tasks = require('../../../dist').importData
+    tasks = require('../../../dist').importManaged
 
     expect(tasks).to.have.property('sources')
   })
@@ -140,9 +140,9 @@ describe('importData tasks', function () {
   it('should get saved bookmarks', function () {
     return main.app
       .service('/state/docs')
-      .get('importData-bookmarks')
+      .get('importManaged-bookmarks')
       .then(doc => {
-        expect(doc).to.have.property('_id', 'importData-bookmarks')
+        expect(doc).to.have.property('_id', 'importManaged-bookmarks')
         expect(doc).to.have.nested.property('bookmarks.0.key', '10990817')
         expect(doc).to.have.nested.property('bookmarks.0.value').above(0)
 
@@ -228,7 +228,7 @@ describe('importData tasks', function () {
   it('should use bookmark to assign query time', function () {
     expect(model.getFileConfig).to.have.nested.property(
       'params.last_successful_query_time',
-      moment(bookmark.value).utc().format('YYYY-MM-DD HH:mm:ss')
+      moment.utc(bookmark.value).format('YYYY-MM-DD HH:mm:ss')
     )
   })
 

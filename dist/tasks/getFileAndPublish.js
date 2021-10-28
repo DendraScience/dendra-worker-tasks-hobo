@@ -5,6 +5,7 @@
  */
 module.exports = {
   clear(m) {
+    delete m.publishCount;
     delete m.responseDate;
   },
 
@@ -94,7 +95,6 @@ module.exports = {
         const {
           timestamp
         } = curr;
-        delete curr.timestamp;
         observations.push(curr); // Publish by timestamp
 
         if (timestamp !== (next && next.timestamp)) {
@@ -145,6 +145,7 @@ module.exports = {
     logger.info(`Got (${res.observationCount}) observations(s), published (${res.publishCount})`);
     m.private.token = res.token;
     m.healthCheckTs = new Date().getTime();
+    m.publishCount = res.publishCount;
     m.responseDate = res.responseDate;
   }
 

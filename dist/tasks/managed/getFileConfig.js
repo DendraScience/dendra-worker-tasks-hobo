@@ -35,11 +35,11 @@ module.exports = {
 
     if (doc && doc.bookmarks) {
       const bookmark = doc.bookmarks.find(bm => bm.key === m.sourceKey);
-      if (bookmark) lastSuccessfulQueryTime = moment(bookmark.value).utc().format(DATE_FORMAT);
+      if (bookmark) lastSuccessfulQueryTime = moment.utc(bookmark.value);
     }
 
     let startDateTime;
-    if (typeof m.source.backfill === 'object') startDateTime = moment().utc().subtract(m.source.backfill).format(DATE_FORMAT);
+    if (typeof m.source.backfill === 'object') startDateTime = moment.utc().subtract(m.source.backfill);
     return {
       method: 'GET',
       params: Object.assign({}, m.source.query_params, {
@@ -47,9 +47,9 @@ module.exports = {
         loggers: m.source.logger,
         only_new_data: 'true'
       }, lastSuccessfulQueryTime ? {
-        last_successful_query_time: lastSuccessfulQueryTime
+        last_successful_query_time: lastSuccessfulQueryTime.format(DATE_FORMAT)
       } : undefined, startDateTime ? {
-        start_date_time: startDateTime
+        start_date_time: startDateTime.format(DATE_FORMAT)
       } : undefined),
       url: m.source.endpoint
     };

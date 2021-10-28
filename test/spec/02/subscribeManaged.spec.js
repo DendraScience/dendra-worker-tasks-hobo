@@ -4,7 +4,7 @@
 
 const STAN = require('node-nats-streaming')
 
-describe('Subscribe to imported records', function () {
+describe('Subscribe to importManaged records', function () {
   this.timeout(30000)
 
   let messages
@@ -43,9 +43,9 @@ describe('Subscribe to imported records', function () {
   it('should subscribe', function () {
     const opts = stan.subscriptionOptions()
     opts.setDeliverAllAvailable()
-    opts.setDurableName('importData')
+    opts.setDurableName('importManaged')
 
-    sub = stan.subscribe('hobo.importData.out.' + main.ts, opts)
+    sub = stan.subscribe('hobo.importManaged.out.' + main.ts, opts)
     messages = []
     sub.on('message', msg => {
       messages.push(JSON.parse(msg.getData()))

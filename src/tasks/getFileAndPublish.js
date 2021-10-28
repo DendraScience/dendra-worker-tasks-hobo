@@ -4,6 +4,7 @@
 
 module.exports = {
   clear(m) {
+    delete m.publishCount
     delete m.responseDate
   },
 
@@ -101,7 +102,6 @@ module.exports = {
         const next = list[i + 1]
         const { timestamp } = curr
 
-        delete curr.timestamp
         observations.push(curr)
 
         // Publish by timestamp
@@ -151,6 +151,7 @@ module.exports = {
 
     m.private.token = res.token
     m.healthCheckTs = new Date().getTime()
+    m.publishCount = res.publishCount
     m.responseDate = res.responseDate
   }
 }

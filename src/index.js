@@ -8,5 +8,6 @@
 
 // Named exports for convenience
 module.exports = {
-  importData: require('./importData')
+  importManaged: require('./importManaged'),
+  importTimeFrame: require('./importTimeFrame')
 }
