@@ -35,6 +35,7 @@ module.exports = {
       days: 30
     };
     let startDateTime = moment.utc(m.source.start_date_time || '2021-01-01 00:00:00');
+    if (typeof m.source.backfill === 'object') startDateTime = moment.utc().subtract(m.source.backfill);
 
     if (doc && doc.bookmarks) {
       const bookmark = doc.bookmarks.find(bm => bm.key === m.sourceKey);
